@@ -4,3 +4,8 @@ export const AUDIT_ACTIONS={tank_registered:'储罐登记',tank_state:'储罐状
 
 export const RECEIPT_STATES={planned:'计划到港',inspected:'化验核对通过',received:'已入罐冻结'};
 export const RECONCILIATION_STATES={matched:'容差内待签',variance:'超差待调查',closed:'主管已结案'};
+
+export const BLIND_STATES={open:'开场受理中',sealed:'已封卷待揭榜',scoring:'计分中（可断点续算）',revealed:'已揭榜'};
+export const BLIND_VERDICTS={normal:'人工：正常放行',anomaly:'人工：异常'};
+export const BLIND_OUTCOMES={correct:'判定一致',hit:'命中异常',miss:'漏判（异常被放行）',false_alarm:'误报（正常被判异）',missing:'缺交（单列）',late:'补录（单列）',noscore:'不计分'};
+export const BLIND_AUDIT={blind_session_opened:'盲测开场',blind_sample_sealed_in:'考样封存',blind_session_sealed:'收卷封卷',blind_reading_accepted:'盲码读数受理',blind_reading_late:'封卷后补录',blind_scoring_done:'盲测计分完成',blind_scoring_failed:'盲测计分中断',blind_session_revealed:'盲测揭榜'};

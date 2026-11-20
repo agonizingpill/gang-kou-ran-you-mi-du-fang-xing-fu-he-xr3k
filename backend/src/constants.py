@@ -9,3 +9,7 @@ LINE_STATES=('idle','busy')
 PERMIT_STATES=('planned','permitted','in_use','completed')
 WINDOW_STATES=('planned','confirmed','in_use','completed')
 RETEST_STATES=('commissioned','reported','closed')
+
+BLIND_STATES=('open','sealed','scoring','revealed')
+BLIND_VERDICTS=('normal','anomaly')
+BLIND_OUTCOMES=('correct','hit','miss','false_alarm','missing','late','noscore')

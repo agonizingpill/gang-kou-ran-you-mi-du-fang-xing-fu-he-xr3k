@@ -2,3 +2,25 @@
 
 .supply-layout{display:grid;grid-template-columns:minmax(260px,.8fr) minmax(0,1.4fr);gap:32px}.supply-layout>aside{border-right:1px solid var(--line);padding-right:25px}.supply-layout label{margin:11px 0 6px}.supply-layout textarea{min-height:75px}.receipt-index{margin:18px 0 22px;display:flex;flex-wrap:wrap;gap:10px}.receipt-pick{background:transparent;color:var(--ink);border:1px solid var(--line);padding:12px;text-align:left}.receipt-pick b,.receipt-pick small{display:block}.receipt-pick small{color:var(--muted);font-size:10px;margin-top:7px}.supply-layout .sheet{padding-top:17px}.supply-layout .readings{gap:24px;flex-wrap:wrap;margin-top:16px;padding:14px 0}.supply-layout .reading b{font-size:22px}.supply-layout .transfer-head h2{margin-bottom:10px}.receipt-proof{margin-top:18px}.receipt-proof .release-stamp,.closure-proof .release-stamp{font-size:19px;transform:rotate(-2deg);padding:7px 12px}.tag.inspected,.tag.received,.tag.matched,.tag.closed{background:oklch(85% .035 150);color:var(--green)}.tag.variance{background:oklch(87% .04 45);color:var(--red)}.variance-proof{padding:20px 0;border-bottom:1px solid var(--line)}.variance-proof strong{font:35px 'Space Grotesk';color:var(--copper)}.variance-proof p{font-size:11px;color:var(--muted)}.closure-proof{margin-top:26px}.closure-proof p{font-size:12px;line-height:1.9}.baseline-form{margin-top:28px;font-size:12px}.baseline-form summary{cursor:pointer;color:var(--copper)}@media(max-width:1000px){.supply-layout{grid-template-columns:1fr}.supply-layout>aside{border-right:0;padding-right:0}}
 .harbor-window{margin-bottom:18px}.retained-row{padding:12px 0;border-bottom:1px solid #d8d0bf;display:grid;gap:5px}.retained-row small{color:#796d60}.tag.permitted,.tag.confirmed,.tag.completed,.tag.closed{background:#dce8df;color:#315b46}.tag.in_use{background:#f0dfc3;color:#815323}.sheet+ .sheet{margin-top:18px}
+
+/* 密度盲测 */
+.receipt-pick.picked{border-color:var(--copper);background:oklch(90% .04 70)}
+.inline{display:inline}
+.blind-state.open{background:oklch(85% .05 75);color:var(--navy)}
+.blind-state.sealed{background:var(--navy);color:var(--paper)}
+.blind-state.scoring{background:oklch(82% .09 85);color:var(--ink)}
+.blind-state.revealed{background:oklch(80% .07 55);color:var(--ink)}
+.blind-outcome.correct,.blind-outcome.hit{background:oklch(85% .035 150);color:var(--green)}
+.blind-outcome.miss{background:oklch(55% .15 35);color:var(--paper)}
+.blind-outcome.false_alarm{background:oklch(82% .10 85);color:var(--ink)}
+.blind-outcome.missing{background:oklch(60% .02 245);color:var(--paper)}
+.blind-outcome.late{background:oklch(87% .05 75);color:var(--ink)}
+.late-flag{color:var(--red);font-style:normal;font-weight:600}
+.blind-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:12px}
+.blind-table th{text-align:left;font-size:10px;letter-spacing:.08em;color:var(--muted);border-bottom:1px solid var(--navy);padding:8px 6px}
+.blind-table td{border-bottom:1px solid var(--line);padding:9px 6px;vertical-align:top}
+.blind-table small{display:block;color:var(--muted);line-height:1.7;margin-top:4px}
+.blind-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:12px}
+.blind-stat{border:1px solid var(--line);padding:12px;background:oklch(96% .012 80)}
+.blind-stat span{display:block;font-size:10px;color:var(--muted);letter-spacing:.05em}
+.blind-stat b{display:block;font-size:22px;margin-top:6px;color:var(--navy)}

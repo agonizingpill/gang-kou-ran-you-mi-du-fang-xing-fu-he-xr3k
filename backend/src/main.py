@@ -27,6 +27,8 @@ from .receipt_routes import router as receipt_router
 app.include_router(receipt_router)
 from .harbor_routes import router as harbor_router
 app.include_router(harbor_router)
+from .blind_routes import router as blind_router
+app.include_router(blind_router)
 @app.exception_handler(IntegrityError)
 async def duplicate(request,e):return JSONResponse({'detail':'编号已存在或关联记录不合法'},status_code=409)
 @app.get('/health')

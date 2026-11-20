@@ -4,6 +4,7 @@ from src.database import Base,engine,Session
 from src.models import User,Tank,FuelSample,Transfer
 from src.receipt_models import TankCapacity,TankReceipt,LoadingReconciliation
 from src.harbor_models import FuelLine,LinePermit,Berth,VesselWindow,RetainedSample,RetestOrder
+from src.blind_models import BlindSession,BlindSample,BlindReading,BlindScore
 from src.security import password_hash
 
 def seed():
@@ -31,5 +32,18 @@ def seed():
                 s.add(TankCapacity(tank_id=tank.id,capacity_liters=cap,density_15=density,baseline_note='演示初始计量基准，按储罐台账与等级密度建立'))
         if not s.scalar(select(TankReceipt.id).where(TankReceipt.code=='RC-DEMO-17')):
             s.add(TankReceipt(tank_id=tanks['TK-06'].id,code='RC-DEMO-17',grade='VLSFO',liters=5000,density_15=985,viscosity=130,sulfur=.35,state='planned'))
-    with Session() as s:print(json.dumps({k:s.scalar(select(func.count()).select_from(v))for k,v in [('users',User),('tanks',Tank),('samples',FuelSample),('transfers',Transfer),('tank_capacities',TankCapacity),('receipts',TankReceipt),('reconciliations',LoadingReconciliation),('fuel_lines',FuelLine),('line_permits',LinePermit),('berths',Berth),('vessel_windows',VesselWindow),('retained_samples',RetainedSample),('retest_orders',RetestOrder)]}))
+        # 盲测演示场次：开场中，6 个考样；人工判定与参考范围封存在字段里，页面揭榜前不回传
+        if not s.scalar(select(BlindSession.id).where(BlindSession.code=='BLIND-2026A')):
+            bs=BlindSession(code='BLIND-2026A',title='2026秋季密度比对盲测（KDE漏判/误报）',state='open',score_error='')
+            s.add(bs);s.flush()
+            demo_samples=[('BC-A01','VLSFO',978.0,'normal','落在VLSFO参考分布主体内'),
+                          ('BC-A02','VLSFO',1005.0,'normal','接近内控上限但参考分布支持'),
+                          ('BC-A03','VLSFO',1035.0,'anomaly','明显高于参考分布且超内控规格'),
+                          ('BC-A04','VLSFO',952.0,'anomaly','低于参考分布主体，人工判异待查'),
+                          ('BC-M01','MGO',852.0,'normal','落在MGO参考分布主体内'),
+                          ('BC-M02','MGO',898.0,'anomaly','超出MGO密度内控上限')]
+            for blind_code,grade,density,verdict,basis in demo_samples:
+                s.add(BlindSample(session_id=bs.id,blind_code=blind_code,grade=grade,
+                                  density_15=density,human_verdict=verdict,human_basis=basis))
+    with Session() as s:print(json.dumps({k:s.scalar(select(func.count()).select_from(v))for k,v in [('users',User),('tanks',Tank),('samples',FuelSample),('transfers',Transfer),('tank_capacities',TankCapacity),('receipts',TankReceipt),('reconciliations',LoadingReconciliation),('fuel_lines',FuelLine),('line_permits',LinePermit),('berths',Berth),('vessel_windows',VesselWindow),('retained_samples',RetainedSample),('retest_orders',RetestOrder),('blind_sessions',BlindSession),('blind_samples',BlindSample),('blind_readings',BlindReading),('blind_scores',BlindScore)]}))
 if __name__=='__main__':seed()
